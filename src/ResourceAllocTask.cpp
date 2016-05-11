@@ -5,10 +5,12 @@ ResourceAllocTask::ResourceAllocTask(int _N, int _M)
 {
     SizeN = _N;
     SizeM = _M;
+    flag = false;
     Invest = new int[SizeN];
     Profit = new int*[SizeM];
     for (int i = 0; i < SizeM; i++)
         Profit[i] = new int[SizeN];
+    S = new Table [SizeM];
     for (int j = 0; j < SizeM; j++)
     {
         S[j] = Table(SizeN);
@@ -18,10 +20,12 @@ ResourceAllocTask::ResourceAllocTask(int _N, int _M)
 ResourceAllocTask::~ResourceAllocTask()
 {
     delete[] Invest;
-    for (int j = 0; j < SizeM; j++)
+   /* for (int j = 0; j < SizeM; j++)
     {
+        cout << "in the cycle destr S[j]" << endl;
         S[j].~Table();
-    }
+    }*/
+    delete[]S;
     for (int i = 0; i < SizeM; i++)
     {
         delete Profit[i];
@@ -45,25 +49,28 @@ void ResourceAllocTask::BellStep()
 
 void ResourceAllocTask::Print(int i)
 {
-    if (i < SizeM - 1)
+    if (flag)
     {
-        for (int j = 0; j < SizeN; j++)
+        if (i < SizeM - 1)
+        {
+            cout << "S" << i;
+            for (int j = 0; j < SizeN; j++)
+            {
+                cout << endl;
+                cout << sur(i, j) << "-текущее состояние, ";
+                cout << maxfun(i, j) << "-максимум, ";
+                cout << "U*" << j << " = " << optcont(i, j);
+                cout << endl;
+            }
+        }
+        if (i == SizeM - 1)
         {
             cout << "S" << i;
             cout << endl;
-            cout << sur(i, j) << "-surplus, ";
-            cout << maxfun(i, j) << "-maxfun, ";
-            cout << "U*" << j << " = "<< optcont(i, j);
+            cout << "Максимальное значение функции = " << maxfun(i, SizeN - 1) << ", ";
+            cout << "U*" << SizeM - 1 << " = " << optcont(i, SizeN - 1);
             cout << endl;
         }
-    }
-    if (i == SizeM - 1)
-    {
-        cout << "S" << i;
-        cout << endl;
-        cout << "Max Value of Fun = " << maxfun(i, SizeN-1)<< ", ";
-        cout << "U*" << SizeM-1 <<" = "<< optcont(i, SizeN-1);
-        cout << endl;
     }
 }
 
@@ -99,22 +106,28 @@ int ResourceAllocTask::ElemPos(int value, int* arr, int size)
 
 void ResourceAllocTask::PrintInvest()
 {
-    for (int i = 0; i < SizeN; i++)
+    if (flag)
     {
-        cout << Invest[i] << " ";
+        for (int i = 0; i < SizeN; i++)
+        {
+            cout << Invest[i] << " ";
+        }
+        cout << endl;
     }
-    cout << endl;
 }
 
 void ResourceAllocTask::PrintProfit()
 {
-    for (int i = 0; i < SizeM; i++)
+    if (flag)
     {
-        for (int j = 0; j < SizeN; j++)
+        for (int i = 0; i < SizeM; i++)
         {
-            cout << Profit[i][j] << "  ";
+            for (int j = 0; j < SizeN; j++)
+            {
+                cout << Profit[i][j] << "  ";
+            }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 
@@ -124,5 +137,22 @@ void ResourceAllocTask::CreateS1()
         S[0].OpTab[i].surplus = Invest[i];
         S[0].OpTab[i].MaxFunValue = Profit[SizeM-1][i];
         S[0].OpTab[i].OptControl = Invest[i];
+    }
+}
+
+void ResourceAllocTask::main()
+{
+    flag = true;
+    cout << "Варианты инвестиций: ";
+    PrintInvest();
+    cout << endl;
+    cout << "Таблица дохода от предприятий";
+    PrintProfit();
+    cout << endl;
+    BellStep();
+    for (int i = 0; i < SizeM; i++)
+    {
+        cout << endl;
+        Print(i);
     }
 }
