@@ -9,11 +9,12 @@ struct Trio {
 class Table
 {
 private:
-   int sizeN;
-    int GetN() { return sizeN; }
+    int size;
+    int GetSize() { return size; }
 
-public:
+public:   
+    Table();
     Table(int _N);
-    ~Table();
+  //  ~Table();
     Trio* OpTab;
 };

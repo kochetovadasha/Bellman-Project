@@ -1,9 +1,15 @@
 #include "Table.h"
 
+Table::Table()
+{
+    size = 0;
+}
+
 Table::Table(int _N)
 {
-    OpTab = new Trio[_N];
-    for (int i = 0; i < _N; i++)
+    size = _N;
+    OpTab = new Trio[size];
+    for (int i = 0; i < size; i++)
     {
         OpTab[i].surplus = 0;
         OpTab[i].OptControl = 0;
@@ -11,7 +17,10 @@ Table::Table(int _N)
     }
 }
 
-Table::~Table()
+/*Table::~Table()
 {
+    cout << "in destr destr table" << endl;
     delete[] OpTab;
-}
+    cout << "delete OpTab" << endl;
+    cout << endl;
+}*/

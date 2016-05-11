@@ -2,29 +2,30 @@
 
 int main()
 {
-    ResourceAllocTask task(7,4);
-    cout << "Enter Invest" << endl;
-    for (int i = 0; i < 7; i++)
+    int sizeN, sizeM;
+    setlocale(LC_ALL, "rus");
+    cout << "Доброго времени суток!" << endl;
+    cout << "Введите количество предприятий" << endl;
+    cin >> sizeM;
+    cout << "Введите количество инвестиций" << endl;
+    cin >> sizeN;
+    ResourceAllocTask task(sizeN,sizeM);
+
+    cout << "Введите варианты инестиций" << endl;
+    for (int i = 0; i < sizeN; i++)
     {
         cin >> task.Invest[i];
     }
-    cout << "Enter Profit" << endl;
-    for (int j = 0; j < 4; j++)
+
+    cout << "Введите доходы по каждому предприятию" << endl;
+    for (int j = 0; j < sizeM; j++)
     {
-        for (int k = 0; k < 7; k++)
+        for (int k = 0; k < sizeN; k++)
         {
             cin >> task.Profit[j][k];
         }
     }
-    task.PrintInvest();
-    cout << endl;
-    task.PrintProfit();
-    cout << endl;
-    task.BellStep();
-    for (int i = 0; i < 4; i++)
-    {
-        cout << endl;
-        task.Print(i);
-    }
+
+    task.main();
     return 0;
 }
