@@ -30,8 +30,7 @@ before_script:
         if [ $TRAVIS_OS_NAME = linux ]; then coverage=ON; fi
     fi
 
-script:
-  - ./build-and-test.sh
+script: scons
 
 after_success:
   # Push coverage info on codecov.io
