@@ -4,6 +4,7 @@ int main()
 {
     int sizeN, sizeM;
     setlocale(LC_ALL, "rus");
+
     cout << "Доброго времени суток!" << endl;
     cout << "Введите количество предприятий" << endl;
     cin >> sizeM;

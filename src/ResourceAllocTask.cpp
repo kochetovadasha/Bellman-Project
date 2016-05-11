@@ -156,8 +156,3 @@ void ResourceAllocTask::main()
         Print(i);
     }
 }
-
-void ResourceAllocTask::OrderManag()
-{
-
-}
