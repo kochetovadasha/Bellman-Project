@@ -1,14 +1,14 @@
-set(target ${LIBRARY})
+set(target ${APPLICATION})
 
-file(GLOB srcs "*.cpp")
+file(GLOB srcs "*.cxx")
 
-add_library(${target} STATIC ${srcs})
+add_application(${target} STATIC ${srcs})
 set_target_properties(${target}
     PROPERTIES OUTPUT_NAME ${MODULE})
 
 if (UNIX)
-  target_link_libraries(${target} ${CMAKE_THREAD_LIBS_INIT})
+  target_link_application(${target} ${CMAKE_THREAD_LIBS_INIT})
 endif (UNIX)
-target_link_libraries(${target} ${LIBRARY_DEPS})
+target_link_application(${target} ${APPLICATION_DEPS})
 
-set(LIBRARY_DEPS "${LIBRARY_DEPS};${target}" PARENT_SCOPE)
+set(APPLICATION_DEPS "${APPLICATION_DEPS};${target}" PARENT_SCOPE)
