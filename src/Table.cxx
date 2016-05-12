@@ -1,26 +1,20 @@
-#include "Table.h"
+//Copyright 2016 GoncharovaKochetova
 
-Table::Table()
+#include "TTable.h"
+
+TTable::TTable()
 {
     size = 0;
 }
 
-Table::Table(int _N)
+TTable::TTable(int _N)
 {
     size = _N;
-    OpTab = new Trio[size];
-    for (int i = 0; i < size; i++)
+    OpTab = new Trio[size];      // создание таблицы-массива структур
+    for (int i = 0; i < size; i++)   //  обнуление элементов структуры 
     {
         OpTab[i].surplus = 0;
         OpTab[i].OptControl = 0;
         OpTab[i].MaxFunValue = 0;
     }
 }
-
-/*Table::~Table()
-{
-    cout << "in destr destr table" << endl;
-    delete[] OpTab;
-    cout << "delete OpTab" << endl;
-    cout << endl;
-}*/
