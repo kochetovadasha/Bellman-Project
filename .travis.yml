@@ -1,8 +1,5 @@
 sudo: false
 
-notifications:
-  email: false
-
 language: cpp
 
 os:
@@ -13,16 +10,6 @@ compiler:
   - gcc
   - clang
 
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
-
-install:
-  - wget https://codecov.io/bash -O $HOME/codecov; chmod +x $HOME/codecov
-
 before_script:
   - coverage=OFF
   - if [ "$CXX" = "g++" ]; then
@@ -31,11 +18,3 @@ before_script:
     fi
 
 script: scons
-
-after_success:
-  # Push coverage info on codecov.io
-  - if [ "${coverage}" = "ON" ]; then
-        $HOME/codecov
-             -p ../devtools_build
-             -x /usr/bin/gcov-4.8;
-    fi

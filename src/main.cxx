@@ -1,4 +1,5 @@
-#include "ResourceAllocTask.h"
+/*#include "ResourceAllocTask.h"
+#include <cstdlib>
 
 int main()
 {
@@ -28,5 +29,6 @@ int main()
     }
 
     task.main();
+    system("pause");
     return 0;
-}
+}*/
